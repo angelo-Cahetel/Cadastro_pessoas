@@ -10,7 +10,17 @@ import SwiftUI
 struct ContentView: View {
     @State var userName: String = ""
     @State var userAge: String = ""
-    @State var persons: [Person] = []
+    @State var persons: [Person] = [] {
+        didSet {
+            clear()
+        }
+    }
+    
+    
+    private func clear() {
+        userName = ""
+        userAge = ""
+    }
     
     var body: some View {
         VStack {
@@ -27,10 +37,6 @@ struct ContentView: View {
                 
                 let user = Person(name: userName, age: age)
                 persons.append(user)
-                
-                userName = ""
-                userAge = ""
-                
             }
             .padding()
             .background(Color.blue)
