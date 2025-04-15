@@ -8,13 +8,43 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var userName: String = ""
+    @State var userAge: String = ""
+    @State var persons: [Person] = []
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            TextField("Nome:", text: $userName)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("Idade:", text: $userAge)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            Button("Cadastrar") {
+                guard let age = Int(userAge) else {
+                    // msg erro
+                    return
+                }
+                
+                let user = Person(name: userName, age: age)
+                persons.append(user)
+                
+                userName = ""
+                userAge = ""
+                
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundStyle(Color.white)
+            .cornerRadius(10)
+            
+            List(persons) { persons in
+                VStack {
+                    Text(persons.info)
+                }
+                
+            }
         }
+        
         .padding()
     }
 }
