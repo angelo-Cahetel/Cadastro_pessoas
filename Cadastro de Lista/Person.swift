@@ -7,15 +7,11 @@
 import Foundation
 
 struct Person: Identifiable {
-    var id = UUID()
-    var name: String
-    var age: Int
-    
-    var info: String {
-        if age > 0 {
-            return "erro"
-        }
-        
-        return "Nome: \(name), \(age) anos"
+    let id = UUID()
+    let name: String
+    let age: Int
+
+    func info() -> String {
+        "\(name), \(age) anos."
     }
 }
